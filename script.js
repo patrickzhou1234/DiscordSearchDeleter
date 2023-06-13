@@ -29,4 +29,4 @@ var idInt = setInterval(() => {
     });
     i++;
     if (i == id.length) clearInterval(idInt);
-}, 1500);
+}, 500);
