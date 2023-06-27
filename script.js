@@ -1,8 +1,20 @@
 var url = window.location.href.split("/");
 var id = [];
 document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
-    id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
+        id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
 });
+if (!document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
+    var fInt = setInterval(() => {
+        document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
+            id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
+        });
+        if (document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
+            clearInterval(fInt);
+        } else {
+            document.querySelectorAll(".endButton-pLBGXH")[1].click();
+        }
+    }, 1500);
+}
 var i = 0;
 var idInt = setInterval(() => {
     fetch("https://discord.com/api/v9/channels/" + url[5] + "/messages/" + id[i], {
@@ -29,4 +41,4 @@ var idInt = setInterval(() => {
     });
     i++;
     if (i == id.length) clearInterval(idInt);
-}, 500);
+}, 700);
