@@ -1,15 +1,18 @@
-var url = window.location.href.split("/");
+const url = window.location.href.split("/");
 var id = [];
 document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
         id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
 });
 if (!document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
-    var fInt = setInterval(() => {
+  	var sInt = setInterval(() => {
         document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
-            id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
+              id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
         });
+    }, 1530);
+    var fInt = setInterval(() => {
         if (document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
             clearInterval(fInt);
+          	clearInterval(sInt);
         } else {
             document.querySelectorAll(".endButton-pLBGXH")[1].click();
         }
@@ -41,4 +44,4 @@ var idInt = setInterval(() => {
     });
     i++;
     if (i == id.length) clearInterval(idInt);
-}, 700);
+}, 1000);
