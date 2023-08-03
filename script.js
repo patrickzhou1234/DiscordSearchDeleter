@@ -31,9 +31,8 @@ function deleteMsgs() {
         );
         i++;
         if (i == id.length) clearInterval(idInt);
-    }, 1000);
+    }, 1500);
 }
-
 const url = window.location.href.split("/");
 var id = [];
 document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
@@ -41,22 +40,27 @@ document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
 });
 if (document.querySelectorAll(".endButton-pLBGXH").length > 0) {
     if (!document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
-        var sInt = setInterval(() => {
-            document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
-                id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
-            });
-            if (document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
-                clearInterval(sInt);
-                deleteMsgs();
-            }
-        }, 1530);
         var fInt = setInterval(() => {
             if (document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
                 clearInterval(fInt);
             } else {
                 document.querySelectorAll(".endButton-pLBGXH")[1].click();
             }
-        }, 1500);
+            setTimeout(() => {
+                document
+                    .querySelectorAll(".searchResult-O9NDji")
+                    .forEach((el) => {
+                        id.push(
+                            el.childNodes[0].childNodes[0].id.split("-")[2],
+                        );
+                    });
+                if (
+                    document.querySelectorAll(".endButton-pLBGXH")[1].disabled
+                ) {
+                    deleteMsgs();
+                }
+            }, 1500);
+        }, 3000);
     }
 } else {
     deleteMsgs();
