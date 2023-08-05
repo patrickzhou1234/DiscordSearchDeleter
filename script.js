@@ -31,7 +31,7 @@ function deleteMsgs() {
         );
         i++;
         if (i == id.length) clearInterval(idInt);
-    }, 1500);
+    }, 1700);
 }
 const url = window.location.href.split("/");
 var id = [];
@@ -45,22 +45,23 @@ if (document.querySelectorAll(".endButton-pLBGXH").length > 0) {
                 clearInterval(fInt);
             } else {
                 document.querySelectorAll(".endButton-pLBGXH")[1].click();
+                setTimeout(() => {
+                    document
+                        .querySelectorAll(".searchResult-O9NDji")
+                        .forEach((el) => {
+                            id.push(
+                                el.childNodes[0].childNodes[0].id.split("-")[2],
+                            );
+                        });
+                    if (
+                        document.querySelectorAll(".endButton-pLBGXH")[1]
+                            .disabled
+                    ) {
+                        deleteMsgs();
+                    }
+                }, 2000);
             }
-            setTimeout(() => {
-                document
-                    .querySelectorAll(".searchResult-O9NDji")
-                    .forEach((el) => {
-                        id.push(
-                            el.childNodes[0].childNodes[0].id.split("-")[2],
-                        );
-                    });
-                if (
-                    document.querySelectorAll(".endButton-pLBGXH")[1].disabled
-                ) {
-                    deleteMsgs();
-                }
-            }, 1500);
-        }, 3000);
+        }, 4000);
     }
 } else {
     deleteMsgs();
