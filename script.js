@@ -66,7 +66,7 @@ function buttonAction() {
                         });
                         if (document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
                             showAlert();
-                            deleteMsgs();
+                            deleteMsgs(url, id);
                         }
                     }, 2000);
                 }
@@ -74,7 +74,7 @@ function buttonAction() {
         }
     } else {
         showAlert();
-        deleteMsgs();
+        deleteMsgs(url, id);
     }
 }
 
@@ -96,7 +96,7 @@ function showAlert() {
         color: "white",
     });
 }
-function deleteMsgs() {
+function deleteMsgs(url, id) {
     var i = 0;
     var idInt = setInterval(() => {
         fetch("https://discord.com/api/v9/channels/" + url[5] + "/messages/" + id[i], {
