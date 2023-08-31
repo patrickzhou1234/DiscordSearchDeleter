@@ -137,7 +137,16 @@ function deleteMsgs(url, id) {
             credentials: "include",
         });
         i++;
-        if (i == id.length) clearInterval(idInt);
+        if (i == id.length) {
+            clearInterval(idInt);
+            Swal.fire({
+                title: "Deleted Messages!",
+                text: "Deleted all messages successfully",
+                icon: "success",
+                background: "black",
+                color: "white",
+            });
+        }
     }, 1700);
 }
 
@@ -145,7 +154,7 @@ window.onload = () => {
     setTimeout(() => {
         Swal.fire({
             title: "Discord Search Deleter",
-            text: "To delete all messages searched for, search for the messages you want to delete then press the key combination Ctrl+Shift+Y or click the trashbin on the top right of the screen.",
+            text: "To delete all messages searched for, search for the messages you want to delete then click the trashbin on the top right of the screen.",
             icon: "success",
             background: "black",
             color: "white",
