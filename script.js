@@ -48,34 +48,49 @@ function buttonAction() {
         });
         return;
     }
-    const url = window.location.href.split("/");
-    var id = [];
-    document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
-        id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
-    });
-    if (document.querySelectorAll(".endButton-pLBGXH").length > 0) {
-        if (!document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
-            var fInt = setInterval(() => {
-                if (document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
-                    clearInterval(fInt);
-                } else {
-                    document.querySelectorAll(".endButton-pLBGXH")[1].click();
-                    setTimeout(() => {
-                        document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
-                            id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
-                        });
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        background: "black",
+        color: "white",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire("Collecting!", "Collecting message IDs.", "success");
+            const url = window.location.href.split("/");
+            var id = [];
+            document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
+                id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
+            });
+            if (document.querySelectorAll(".endButton-pLBGXH").length > 0) {
+                if (!document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
+                    var fInt = setInterval(() => {
                         if (document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
-                            showAlert();
-                            deleteMsgs(url, id);
+                            clearInterval(fInt);
+                        } else {
+                            document.querySelectorAll(".endButton-pLBGXH")[1].click();
+                            setTimeout(() => {
+                                document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
+                                    id.push(el.childNodes[0].childNodes[0].id.split("-")[2]);
+                                });
+                                if (document.querySelectorAll(".endButton-pLBGXH")[1].disabled) {
+                                    showAlert();
+                                    deleteMsgs(url, id);
+                                }
+                            }, 2000);
                         }
-                    }, 2000);
+                    }, 4000);
                 }
-            }, 4000);
+            } else {
+                showAlert();
+                deleteMsgs(url, id);
+            }
         }
-    } else {
-        showAlert();
-        deleteMsgs(url, id);
-    }
+    });
 }
 
 var prevUrl = window.location.href;
@@ -128,7 +143,6 @@ function deleteMsgs(url, id) {
 
 window.onload = () => {
     setTimeout(() => {
-        addButton();
         Swal.fire({
             title: "Discord Search Deleter",
             text: "To delete all messages searched for, search for the messages you want to delete then press the key combination Ctrl+Shift+Y or click the trashbin on the top right of the screen.",
@@ -136,6 +150,5 @@ window.onload = () => {
             background: "black",
             color: "white",
         });
-        document.getElementById("searchdeleter-btn").onclick = buttonAction;
     }, 5000);
 };
