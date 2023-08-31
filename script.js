@@ -60,7 +60,13 @@ function buttonAction() {
         confirmButtonText: "Yes, delete it!",
     }).then((result) => {
         if (result.isConfirmed) {
-            Swal.fire("Collecting!", "Collecting message IDs.", "success");
+            Swal.fire({
+                title: "Collecting!",
+                text: "Collecting message IDs.",
+                icon: "success",
+                background: "black",
+                color: "white",
+            });
             const url = window.location.href.split("/");
             var id = [];
             document.querySelectorAll(".searchResult-O9NDji").forEach((el) => {
